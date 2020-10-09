@@ -1,0 +1,152 @@
+<template>
+  <div class="uptpd">
+    <tops :uptList="uptList"></tops>
+    <div class="ubo">
+      <div class="umm">
+    <input class="ipt" @keydown="nowshow=true" maxlength="18" minlength="6" v-model="nowpassword" type="text" placeholder="请输入当前密码" />
+    <span @click="nowpassword = '',nowshow = false"
+      style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
+      :class="nowshow?'el-icon-circle-close':''">
+    </span>
+      </div>
+      <div class="umm">
+    <input class="ipt" @keydown="newshow=true" maxlength="18" minlength="6" v-model="newpassword" type="text" placeholder="请输入新密码" />
+    <span @click="newpassword = '',newshow = false"
+      style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
+      :class="newshow?'el-icon-circle-close':''">
+    </span>
+      </div>
+      <div class="umm">
+    <input class="ipt" @keydown="agashow=true" maxlength="18" minlength="6" v-model="againpassword" type="text" placeholder="请再次输入密码" />
+    <span @click="againpassword = '',agashow = false"
+      style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
+      :class="agashow?'el-icon-circle-close':''">
+    </span>
+      </div>
+      <div>
+        <button class="zc" @click="isOK()">确认修改</button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+
+import tops from '@/components/top'
+
+export default{
+  name:'uptpd',
+  components:{
+    tops
+  },
+  data(){
+    return{
+      uptList:['el-icon-close','修改密码'],
+      nowpassword:"",
+      newpassword:"",
+      againpassword:"",
+      nowshow:false,
+      newshow:false,
+      agashow:false
+    }
+  },
+  methods:{
+    isOK(){
+      var id = localStorage.getItem('id')
+      var _this = this;
+      if(this.nowpassword == ""){
+        this.bus.$emit('tips', {
+          show: true,
+          title: '请输入旧密码'
+        })
+      }else if (this.nowpassword.length < 6) {
+        this.bus.$emit('tips', {
+          show: true,
+          title: '旧密码不正确'
+        })
+      }else if(this.newpassword == ""){
+        this.bus.$emit('tips', {
+          show: true,
+          title: '请输入新密码'
+        })
+      }else if (this.newpassword.length < 6) {
+        this.bus.$emit('tips', {
+          show: true,
+          title: '密码不安全，建议6位以上'
+        })
+      }else if(this.nowpassword == this.newpassword){
+        this.bus.$emit('tips', {
+          show: true,
+          title: '新密码和旧密码不能一样'
+        })
+      }else if(this.newpassword != this.againpassword){
+        this.bus.$emit('tips', {
+          show: true,
+          title: '新密码和确认密码不一致'
+        })
+      }else if(this.newpassword === this.againpassword && this.newpassword != this.nowpassword){
+        _this.$http.post('/externalApi/revisepwd',{
+          userId:id,
+          oldpassword: this.nowpassword,
+          newpassword: this.newpassword,
+          password: this.againpassword
+          }).then(function(respone){
+            console.log(respone)
+              if(respone.data.code === 0){
+                _this.bus.$emit('tips', {
+                  show: true,
+                  title: "密码修改成功"
+                })
+              }else{
+                _this.bus.$emit('tips', {
+                  show: true,
+                  title: respone.data.message
+                })
+              }
+          })
+      }
+    }
+  }
+}
+</script>
+
+<style>
+  .el-input__inner{
+    color: black;
+    font-size: 12px;
+    letter-spacing: 2px;
+    background: #F3F3F3;
+  }
+  .umm{
+    width: 90%;
+    height: 45px;
+    font-size: 16px;
+    line-height: 3;
+    font-family: '黑体';
+    margin-left: 2%;
+    margin-top: 15px;
+    border-bottom: 1px solid gainsboro;
+  }
+  .ipt{
+    outline: none;
+    border: none;
+    background: #F3F3F3;
+    height: 40px;
+    width: 90%;
+    font-size: 17px;
+  }
+  .zc{
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 40px;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 20px;
+    background: #007EFF;
+    color: white;
+    font-size: 18px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+</style>
