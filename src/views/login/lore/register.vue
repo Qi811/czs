@@ -2,7 +2,7 @@
 	<div class="register">
 		<div class="usern">
 		  <span>昵称</span>
-		  <input type="text" v-model="nickname" maxlength="10" minlength="1" @keydown="nicknameshow=true" placeholder="请输入昵称"/>
+		  <input type="text" v-model="nickname" maxlength="10" minlength="1" placeholder="请输入昵称"/>
       <span @click="nickname = '',nicknameshow = false"
         style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
         :class="nicknameshow?'el-icon-circle-close':''">
@@ -10,7 +10,7 @@
 		</div>
 		<div class="sjh">
 		  <span>手机号</span>
-		  <input type="text" maxlength="11" v-model="tel" @keydown="telshow=true" placeholder="请输入手机号"/>
+		  <input type="number" maxlength="11" v-model="tel" @keydown="telshow=true" placeholder="请输入手机号"/>
       <span @click="tel = '',telshow = false"
         style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
         :class="telshow?'el-icon-circle-close':''">
@@ -23,23 +23,23 @@
 		</div> -->
 		<div class="mm">
 		  <span>密码</span>
-		  <input type="text" maxlength="18" minlength="6" @keydown="mmshow=true" v-model="pass" placeholder="请输入密码" class="ag"/>
-      <span @click="pass = '',mmshow = false"
+		  <input type="password" maxlength="18" minlength="6" @keydown="mmshow=true" v-model="pass" placeholder="请输入密码" class="ag"/>
+      <!-- <span @click="pass = '',mmshow = false"
         style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
         :class="mmshow?'el-icon-circle-close':''">
-      </span>
+      </span> -->
 		</div>
 		<div class="agmm">
 		  <span>确认密码</span>
-		  <input type="text" maxlength="18" minlength="6" @keydown="ammshow=true" v-model="twopassword" placeholder="再次输入密码"/>
-      <span @click="twopassword = '',ammshow = false"
+		  <input type="password" maxlength="18" minlength="6" @keydown="ammshow=true" v-model="twopassword" placeholder="再次输入密码"/>
+      <!-- <span @click="twopassword = '',ammshow = false"
         style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
         :class="ammshow?'el-icon-circle-close':''">
-      </span>
+      </span> -->
 		</div>
 		<div class="tuij">
 		  <span>邀请码</span>
-		  <input type="text" maxlength="6" v-model="memberId" placeholder="请填写邀请码"/>
+		  <input type="number" disabled="disabled" maxlength="6" v-model="memberId" placeholder="邀请码" style="background: white;"/>
 		</div>
 		<div class="zcn">
 		  <button class="zc" @click="regi()">注册</button>
@@ -62,8 +62,8 @@ export default{
 			cs : /^1[3-9]{1}[0123456789]{9}$/,
       nicknameshow:false,
       telshow:false,
-      mmshow:false,
-      ammshow:false
+      // mmshow:false,
+      // ammshow:false
 		}
 	},
   methods:{
@@ -84,12 +84,6 @@ export default{
         this.bus.$emit('tips', {
           show: true,
           title: '请输入正确的手机号'
-        })
-      }
-      else if (!this.cs.test(this.tel)){
-        this.bus.$emit('tips', {
-          show: true,
-          title: '手机号输入格式不正确'
         })
       }
       // else if(this.code == ""){
@@ -117,20 +111,17 @@ export default{
         })
       }else{
         var _this = this
-        console.log("登录中...")
         this.bus.$emit('tips', {
           show: true,
-          title: '登录中...'
+          title: '注册中...'
         })
-        _this.$http.post('/externalApi/register',{
+        _this.$http.post('/register',{
           username:this.tel,
           password:this.pass,
           twopassword:this.twopassword,
           MemberId:this.memberId,
-          nickname:this.nickname,
+          nickname:this.nickname
         }).then(res => {
-            console.log(res)
-            console.log(res.data.code)
 						if (res.data.code == 0) {
               localStorage.getItem("id",res.data.id)
 						    // this.$Raichu.reLaunch('/pages/index/index');
@@ -140,13 +131,26 @@ export default{
                   title: '注册成功'
                 })
 						} else {
-                this.bus.$emit('tips', {
-                  show: true,
-                  title: '注册失败'
-                })
+              this.bus.$emit('tips', {
+                show: true,
+                title: '注册失败' + res.data.message
+              })
+              this.$router.replace({ path: "/setting/login" })
 						}
 					});
       }
+    }
+  },
+  updated() {
+    if(this.nickname != ''){
+      this.nicknameshow = true
+    }else{
+      this.nicknameshow = false
+    }
+    if(this.tel != ''){
+      this.telshow = true
+    }else{
+      this.telshow = false
     }
   }
 }
@@ -162,7 +166,10 @@ export default{
     padding-left: 6px;
     font-family: '黑体';
     margin-left: 5%;
-    margin-top: 15px;
+    margin-top: 11px;
+  }
+  .agmm input{
+    width: 50%;
   }
   input{
     width: 60%;
@@ -176,7 +183,7 @@ export default{
   .ag{
     margin-left: 35px;
   }
-  .hqu{
+  /* .hqu{
     background: #007EFF;
     border: none;
     outline: none;
@@ -186,7 +193,7 @@ export default{
     padding: 5px;
     margin-top: 10px;
     color: white;
-  }
+  } */
   .zcn{
     width: 100%;
     display: flex;
@@ -195,8 +202,8 @@ export default{
   }
   .zc{
     width: 255px;
-    margin-left: 5%;
     margin-top: 32px;
+    margin-bottom: 10px;
     height: 42px;
     border: none;
     outline: none;

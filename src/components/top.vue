@@ -1,7 +1,7 @@
 <template>
   	<div class="he">
-      <span :class="uptList[0]"></span>
-      <span style="text-align: center;font-size: 20px;position: absolute;left: 38%;margin-top: 2px;">
+      <span :class="uptList[0]" @click="goback"></span>
+      <span style="text-align: center;font-size: 20px;position: absolute;left: 38%;margin-top: 12px;">
         {{uptList[1]}}
       </span>
     </div>
@@ -18,6 +18,11 @@
     data(){
       return{
 
+      }
+    },
+    methods:{
+      goback(){
+        this.$router.go(-1)
       }
     }
   }

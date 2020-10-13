@@ -16,7 +16,9 @@
             <router-link :to="{name:'register'}">注册</router-link>
           </span>
         </div>
-        <router-view></router-view>
+        <keep-alive>
+          <router-view></router-view>
+        </keep-alive>
       </div>
     </div>
   </div>
@@ -32,7 +34,7 @@ export default{
     }
   },
   updated() {
-    localStorage.setItem('isactive',this.isactive)
+    // localStorage.setItem('isactive',this.isactive)
   }
 }
 </script>
@@ -43,7 +45,7 @@ export default{
     height: 100vh;
   }
   .setting{
-    background: url('../../assets/images/图层3.png');
+    background: url('../../assets/images/tc3.png');
     background-size: cover;
     position: relative;
   }
@@ -57,12 +59,15 @@ export default{
   }
   .cont{
     position: absolute;
-    top: 40px;  
+    top: 40px;
     left: 0;
     right: 0;
     bottom: 0;
     margin: 10px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   .yuan{
     display: flex;
@@ -70,11 +75,11 @@ export default{
     align-items: center;
     margin: 20px auto;
     position: absolute;
-    top: 50px;
+    top: 30px;
     left: 0;
     right: 0;
   }
-  .yy{    
+  .yy{
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -91,10 +96,11 @@ export default{
   .kk{
     background-color: white;
     position: absolute;
-    top: 25%;
+    /* top: 25%;
     left: 10%;
     bottom: 10%;
-    right: 10%;
+    right: 10%; */
+    margin-top: 30px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;

@@ -1,23 +1,24 @@
 <template>
   <div class="uptpd">
-    <tops :uptList="uptList"></tops>
+    <tops :uptList="uptList" class="tops"></tops>
     <div class="ubo">
       <div class="umm">
-    <input class="ipt" @keydown="nowshow=true" maxlength="18" minlength="6" v-model="nowpassword" type="text" placeholder="请输入当前密码" />
+    <input class="ipt" @keydown="nowshow=true" maxlength="18" minlength="6" v-model="nowpassword" type="password" placeholder="请输入当前密码" />
     <span @click="nowpassword = '',nowshow = false"
       style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
       :class="nowshow?'el-icon-circle-close':''">
     </span>
+    <!-- <img src="../../../assets/close.png" /> -->
       </div>
       <div class="umm">
-    <input class="ipt" @keydown="newshow=true" maxlength="18" minlength="6" v-model="newpassword" type="text" placeholder="请输入新密码" />
+    <input class="ipt" @keydown="newshow=true" maxlength="18" minlength="6" v-model="newpassword" type="password" placeholder="请输入新密码" />
     <span @click="newpassword = '',newshow = false"
       style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
       :class="newshow?'el-icon-circle-close':''">
     </span>
       </div>
       <div class="umm">
-    <input class="ipt" @keydown="agashow=true" maxlength="18" minlength="6" v-model="againpassword" type="text" placeholder="请再次输入密码" />
+    <input class="ipt" @keydown="agashow=true" maxlength="18" minlength="6" v-model="againpassword" type="password" placeholder="请再次输入密码" />
     <span @click="againpassword = '',agashow = false"
       style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
       :class="agashow?'el-icon-circle-close':''">
@@ -85,7 +86,7 @@ export default{
           title: '新密码和确认密码不一致'
         })
       }else if(this.newpassword === this.againpassword && this.newpassword != this.nowpassword){
-        _this.$http.post('/externalApi/revisepwd',{
+        _this.$http.post('/revisepwd',{
           userId:id,
           oldpassword: this.nowpassword,
           newpassword: this.newpassword,
@@ -111,6 +112,9 @@ export default{
 </script>
 
 <style>
+  .tops{
+    padding: 10px 0px 0px 10px;
+  }
   .el-input__inner{
     color: black;
     font-size: 12px;

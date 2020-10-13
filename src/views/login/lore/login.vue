@@ -1,20 +1,20 @@
 <template>
   <div class="login">
     <div class="tel">
-      <p>手机号</p>
-      <input class="ipt" maxlength="11" @keydown="isshow=true" v-model="tel" type="text" placeholder="请输入手机号" />
+      <span>手机号</span>
+      <input class="ipt" maxlength="11" v-model="tel" type="number" placeholder="请输入手机号" style="background: white;"/>
       <span @click="tel = '',isshow = false"
         style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
         :class="isshow?'el-icon-circle-close':''">
       </span>
     </div>
     <div class="pass">
-      <p>密码</p>
-      <input class="ipt" @keydown="mmshow=true" v-model="paw" type="text" placeholder="请输入密码" />
-      <span @click="paw = '',mmshow = false"
+      <span>密码</span>
+      <input class="ipt" v-model="paw" type="password" placeholder="请输入密码" style="background: white;"/>
+      <!-- <span @click="paw = '',mmshow = false"
         style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
         :class="mmshow?'el-icon-circle-close':''">
-      </span>
+      </span> -->
     </div>
     <div class="btn">
       <button class="dl" @click="logins()">登录</button>
@@ -30,7 +30,7 @@ export default{
     return{
       tel:'',
       paw:'',
-      mmshow:false,
+      // mmshow:false,
       isshow:false,
       cs : /^1[3-9]{1}[0123456789]{9}$/
     }
@@ -63,17 +63,17 @@ export default{
         })
       }
       else{
-        _this.$http.post('/externalApi/login',{
+        _this.$http.post('/login',{
           username:this.tel,
           password: this.paw
         }).then(res => {
-            console.log(res)
             if(res.data.id){
               localStorage.setItem("id",res.data.id)
               this.bus.$emit('tips', {
                 show: true,
                 title: '登录成功'
               })
+              this.$router.replace({path:'/home/all'})
             }else{
               this.bus.$emit('tips', {
                 show: true,
@@ -82,6 +82,13 @@ export default{
             }
         })
       }
+    }
+  },
+  updated() {
+    if(this.tel != ''){
+      this.isshow = true
+    }else{
+      this.isshow = false
     }
   }
 }
@@ -98,15 +105,14 @@ export default{
     margin-right: 5%;
     margin-top: 15px;
   }
-  .ipt{
+  input{
+    width: 90%;
     outline: none;
     border: none;
-    height: 40px;
-    width: 90%;
-    font-size: 17px;
+    height: 30px;
+    font-size:17px;
   }
   .btn{
-    margin-top: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -114,8 +120,8 @@ export default{
   }
   .dl{
     width: 255px;
-    margin-left: 5%;
     margin-top: 32px;
+    margin-bottom: 10px;
     height: 42px;
     border: none;
     outline: none;
@@ -125,5 +131,6 @@ export default{
     font-size: 1.3rem;
     letter-spacing: 10px;
     text-align: center;
+    padding: 0px 10px 0px 10px;
   }
 </style>

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Loading } from 'element-ui';
 import qs from 'qs';
 
-axios.defaults.baseURL = 'http://192.168.0.7:8080';
+axios.defaults.baseURL = 'http://192.168.0.15:8080/externalApi';
 axios.defaults.timeout = 5000;
 // axios.defaults.headers.common['token'] = token
 

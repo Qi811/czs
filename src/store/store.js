@@ -5,19 +5,18 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
 	namespaced:true,
 	modules:{
-		
+
 	},
 	state:{
-		
 	},
 	mutations:{
-		
+   
 	},
 	actions:{
-		
+
 	},
 	getters:{
-		
+
 	},
 })
 

@@ -1,38 +1,35 @@
 <template>
-  <!-- <div class="ewm" style="background: url(/static/img/33.1bd0baa.jpg);"> -->
-  <div class="ewm" :style="{backgroundImage:'url(/static/img/' + imgList[num] +')'}">
+  <div class="ewm" :style="{backgroundImage:'url(' + require('@/assets/images/bg/' + imgList[num] ) + ')'}">
     <div class="inner">
       <div class="inertwo">
         <div class="award">
           <div class="teamaward">
 		      	<div class="one"></div>
             <p class="hd">团队获得奖励</p>
-            <p class="shu">220</p>
+            <p class="shu">{{teamPrice}}</p>
           </div>
           <div class="sucees">
             <p class="hd">已成功邀请</p>
-            <p class="shu">22<span style="font-size: 15px;padding-left: 10px;">人</span></p>
+            <p class="shu">{{teamSuccess}}<span style="font-size: 15px;padding-left: 10px;">人</span></p>
 			      <div class="two"></div>
           </div>
         </div>
       </div>
       <div class="hy">
-        <button class="seefriends">
+        <button class="seefriends" @click="lookFriend">
           查看好友
         </button>
       </div>
       <div class="share">
         <div class="inshare">
           <span>
-            分享连接：http://www.hnchengben.com/new.html#/Api/pickTask?id=50&page=1&size=10&status=0
+            分享连接：{{url}}
           </span>
         </div>
       </div>
       <div class="incode">
         <div class="code">
-          <div class="wm">
-
-          </div>
+          <img :src="data" class="wm"/>
         </div>
       </div>
     </div>
@@ -45,34 +42,57 @@
     data(){
       return{
         imgList:[
-          'erw.4c27f11.png',
-          '22.1609d33.jpg',
-          '33.1bd0baa.jpg',
-          '44.4e4182c.png',
-          '55.a8c72a4.jpg',
-          '66.2b181e3.jpg',
-          '77.bfa36b5.jpg',
-          '88.0a0a2e3.jpg',
-          '99.18b84c0.jpg',
-          '1010.2a51830.jpg'
+          'erw.png',
+          '22.jpg',
+          '33.jpg',
+          '44.png',
+          '55.jpg',
+          '66.jpg',
+          '77.jpg',
+          '88.jpg',
+          '99.jpg',
+          '1010.jpg'
         ],
         num:0,
-        timer:''
+        timer:'',
+        data:'',
+        url:'',
+        teamPrice:'',
+        teamSuccess:'',
+        id:localStorage.getItem('id')
       }
     },
     created() {
       this.getRandom(0,9)
+      this.$http.post('/shareInfo',{
+        userId:this.id
+      }).then((res) => {
+        this.data = res.data.data
+        this.url = res.data.url
+      })
+      this.$http.post('/teamMoney',{
+        userId:this.id
+      }).then((res) => {
+        this.teamPrice = res.data.teamMoney
+      })
+      this.$http.post('/inviteNum',{
+        id:this.id
+      }).then((res) => {
+        this.teamSuccess = res.data.number
+      })
     },
     mounted() {
-      this.timer = setInterval(()=>{
-        this.getRandom(0,9)
-      },2000)
+      // this.timer = setInterval(()=>{
+      //   this.getRandom(0,9)
+      // },2000)
     },
     methods:{
       getRandom(minNum,maxNum){
         this.num = Math.floor(Math.random()*(maxNum - minNum + 1)+minNum)
-        // console.log(this.num)
       },
+      lookFriend(){
+        this.$router.push({path:'/friend'})
+      }
     },
     beforeDestroy() {
       clearInterval(this.timer)
@@ -87,6 +107,7 @@
     position: relative;
     background-repeat: no-repeat;
     background-size: 100% 100%;
+    /* margin-bottom: 57px; */
     /* background-size: cover; */
     /* background-position: center; */
   }
@@ -94,7 +115,7 @@
     width: 100%;
     height: 90px;
     position: absolute;
-    top: 48%;
+    top: 33%;
     bottom: 50%;
     display: flex;
     justify-content: center;
@@ -144,7 +165,7 @@
     width: 100%;
     height: 45px;
     position: absolute;
-    top: 48%;
+    top: 33%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -162,7 +183,7 @@
   }
   .share{
     position: absolute;
-    top: 68%;
+    top: 53%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -180,21 +201,21 @@
     width: 100%;
     height: 100px;
     position: absolute;
-    top: 78%;
+    top: 65%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 5px;
   }
   .code{
-    width: 150px;
-    height: 140px;
+    width: 170px;
+    height: 160px;
     background-color: #E0DED9;
   }
   .wm{
-    width: 130px;
-    height: 120px;
+    width: 160px;
+    height: 150px;
     background: #FFFFFF;
-    margin: 10px;
+    margin: 5px;
   }
 </style>

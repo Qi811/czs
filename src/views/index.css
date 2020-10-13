@@ -1,0 +1,168 @@
+.body {
+    width: 100%;
+    min-height: 610px;
+    height: 100%;
+    padding-bottom: 57px;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    outline: none;
+    border: none;
+}
+
+button:active {
+    opacity: 0.5;
+}
+
+.f {
+    display: flex;
+}
+
+.fy {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.homeall {
+    background-color: #fff;
+    margin: 0px 10px;
+}
+
+.allson {
+    width: 100%;
+    height: 80px;
+    border-top: 1px rgb(69, 69, 69, 0.2) solid;
+    display: flex;
+    align-items: center;
+}
+
+.allson:nth-child(1) {
+    border: none;
+}
+
+.taskphoto {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 20px;
+    background-color: brown;
+}
+
+.tackmess {
+    flex: 1;
+    text-align: left;
+    margin-left: 10px;
+}
+
+.tackname {
+    font-family: "Microsoft Yahei";
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.number {
+    color: #959595;
+    font-size: 12px;
+}
+
+.number span {
+    margin-left: 10px;
+}
+
+.tackmoney {
+    flex: 0.5;
+    font-family: Verdana;
+    color: red;
+    font-size: 19px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.tackmoney span {
+    font-size: 15px;
+    color: #696969;
+}
+
+.sontitle {
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(rgba(0, 0, 255, 0.5), rgba(255, 255, 255, 0.5));
+}
+
+.sontitle span {
+    font-size: 15px;
+    line-height: 80px;
+    display: inline-block;
+}
+
+.sontitle span:nth-child(1) {
+    width: 45px;
+    height: 26px;
+    padding-top: 45px;
+    transform: rotate(90deg) scale(0.6);
+    background: url(..\assets\down.png) no-repeat;
+}
+.sontitle span:nth-child(2) {
+    line-height: 70px;
+    margin-left: 5px;
+}
+
+
+/* 提示框 */
+
+.hiit {
+    width: 100vw;
+    height: 1000vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 88;
+}
+
+.hint {
+    width: 75%;
+    height: 150px;
+    background-color: #fff;
+    border-radius: 15px;
+    position: fixed;
+    top: 30%;
+    left: 10%;
+    z-index: 99;
+}
+
+.hint div {
+    text-align: center;
+    line-height: 80px;
+    font-size: 4vw;
+}
+
+.hint button {
+    width: 20%;
+    height: 30px;
+    border-radius: 15px;
+    background: linear-gradient( -135deg, rgba(0, 0, 255, 0.5), rgba(255, 42, 255, 0.5));
+    border: none;
+}
+
+#cancel {
+    border: 1.8px rgb(0, 123, 219, 0.5) solid;
+    background: none;
+    margin-right: 20px;
+}
+
+#sure {
+    background: rgb(0, 123, 219, 0.5);
+}
