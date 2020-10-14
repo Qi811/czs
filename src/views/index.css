@@ -88,6 +88,9 @@ button:active {
     font-size: 19px;
     text-align: right;
     margin-right: 10px;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
 }
 
 .tackmoney span {

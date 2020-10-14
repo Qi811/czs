@@ -18,8 +18,6 @@
         userId: localStorage.getItem('id'),
       }).then((res) => {
         that.hurl = res.data;
-        // console.log(res);
-        console.log(that.hurl);
       });
     },
   }

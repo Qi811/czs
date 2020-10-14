@@ -31,7 +31,8 @@ router.beforeEach((to,from,next) => {
     || to.path == '/bottom' || to.path == '/height' || to.path == '/one'
     || to.path == '/one/daiwc' || to.path == '/one/shsb' || to.path == '/one/shz'
     || to.path == '/one/ysh' || to.path == '/uptpd' || to.path == '/cashList'
-    || to.path == '/cashInfo' || to.path == '/cash'){
+    || to.path == '/cashInfo' || to.path == '/cash' || to.path == '/gamedemo'
+    || to.path == '/gameplay' || to.path == '/gamereceive' || to.path == '/gameover'){
     if(localStorage.getItem('id')){
       next()
     }else{

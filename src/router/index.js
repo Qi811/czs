@@ -174,9 +174,33 @@ export default new Router({
     {
         path: "/game",
         name: "game",
-        component: () => import ('@/views/home/gamedemo'),
+        component: () => import ('@/views/home/game/gamedemo'),
         meta:{
           title:"游戏试玩"
+        }
+    },
+    {
+        path: "/gameplay",
+        name: "gameplay",
+        component: () => import ('@/views/home/game/gameplay'),
+        meta:{
+          title:"游戏试玩"
+        }
+    },
+    {
+        path: "/gamereceive",
+        name: "gamereceive",
+        component: () => import ('@/views/home/game/gamereceive'),
+        meta:{
+          title:"接取列表"
+        }
+    },
+    {
+        path: "/gameover",
+        name: "gameover",
+        component: () => import ('@/views/home/game/gameover'),
+        meta:{
+          title:"完成列表"
         }
     },
     {

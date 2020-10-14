@@ -5,16 +5,13 @@
     </div>
     <div class="btnPlay">
       <div class="tryPlay">
-        <span></span>
-        <button>试玩列表</button>
+        <button @click="gameplay">试玩列表</button>
       </div>
       <div class="recelivePlay">
-        <span></span>
-        <button>接取列表</button>
+        <button @click="gamereceive">接取列表</button>
       </div>
       <div class="sucessPlay">
-        <span></span>
-        <button>完成列表</button>
+        <button @click="gameover">完成列表</button>
       </div>
     </div>
     <div class="homeall">
@@ -74,9 +71,9 @@
     androidosv 10以上传29  10以下传0 */
     created() {
       var that = this;
-      var id = 1;
+      var id = localStorage.getItem('id');
       var page = 10;//分页数据
-     var ptype = localStorage.getItem("ptype");
+      var ptype = localStorage.getItem("ptype");
       var aosid = localStorage.getItem("aosid");
       var osid =localStorage.getItem("osid");
       var aos = localStorage.getItem("aos");
@@ -87,7 +84,13 @@
 
         that.$http
           .get("/XwTaskList", {
-            params: { userId: id, ptype: ptype, msaoaid: aosid, deviceid: osid, androidosv: sv},
+            params: {
+              userId: id,
+              ptype: ptype,
+              msaoaid: aosid,
+              deviceid: osid,
+              androidosv: sv,
+            },
           })
           .then((res) => {
             // console.log(res);
@@ -102,7 +105,7 @@
                that.nono = true;
                that.gameitem = "暂无更多...";
              }else{
-               that.list = that.list.concat(reslist[i]);
+               that.list.push(reslist[i]);
              }
             }
           });
@@ -142,6 +145,15 @@
       },
       demodetail(id){
         this.$router.push({path:'/gamedetail/'+id});
+      },
+      gameplay(){
+        this.$router.push({path:'/gameplay'})
+      },
+      gamereceive(){
+        this.$router.push({path:'/gamereceive'})
+      },
+      gameover(){
+        this.$router.push({path:'/gameover'})
       }
     },
   };
@@ -159,7 +171,7 @@
     right: 0;
   }
   .gametitle span{
-    line-height: 50px;
+    line-height: 55px;
     text-align: left;
     color: #EEEEEE;
   }
