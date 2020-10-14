@@ -18,7 +18,6 @@ export default new Router({
           title:"登录"
         },
         beforeEnter(to,from,next){
-          console.log(to,from)
           if(to.path == '/setting/login'){
             localStorage.setItem('isactive',1)
             next()
@@ -133,6 +132,22 @@ export default new Router({
         }
     },
     {
+        path: "/beginner",
+        name: "beginner",
+        component: () => import ('@/views/myPage/beginner.vue'),
+        meta:{
+          title:"新手指南"
+        }
+    },
+    {
+        path: "/business",
+        name: "business",
+        component: () => import ('@/views/myPage/business.vue'),
+        meta:{
+          title:"商务合作"
+        }
+    },
+    {
         path: "/bottom",
         name: "bottom",
         component: () => import ('@/views/home/bottom'),
@@ -146,6 +161,22 @@ export default new Router({
         component: () => import ('@/views/home/height'),
         meta:{
           title:"高价区"
+        }
+    },
+    {
+        path: "/enjoy",
+        name: "enjoy",
+        component: () => import ('@/views/home/enjoy'),
+        meta:{
+          title:"赏金榜"
+        }
+    },
+    {
+        path: "/game",
+        name: "game",
+        component: () => import ('@/views/home/gamedemo'),
+        meta:{
+          title:"游戏试玩"
         }
     },
     {
@@ -167,13 +198,6 @@ export default new Router({
           component: () => import ('@/views/one/daiwc'),
           meta:{
             title:"待完成"
-          },
-          beforeEnter(to,from,next){
-            if(to.path == '/one/daiwc'){
-              localStorage.setItem('isActive',1)
-              next()
-            }
-            next()
           }
         },
         {

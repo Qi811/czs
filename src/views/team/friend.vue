@@ -6,19 +6,21 @@
         下级人员
       </span>
     </div>
-    <div class="xh" v-for="item in dataList" :key="item.id" v-if="dataList != ''" >
-      <div class="tp">
-        <div class="tpn"></div>
+    <div class="two">
+      <div class="xh" v-for="item in dataList" :key="item.id" v-if="dataList != ''" >
+        <div class="tp">
+          <div class="tpn"></div>
+        </div>
+        <div class="rg">
+          <p class="ywc">{{item.nickname}}</p>
+          <p class="sj">邀请时间：{{item.create_time | formatDate}}</p>
+        </div>
       </div>
-      <div class="rg">
-        <p class="ywc">{{item.nickname}}</p>
-        <p class="sj">邀请时间：{{item.create_time | formatDate}}</p>
+      <div class="wsj" v-if="dataList == ''">
+        <div style="font-size: 16px;color: #696969;text-align: center;background-color: #F3F3F3;line-height: 80px;">
+          暂无好友
+        </div>
       </div>
-    </div>
-    <div class="wsj" v-if="dataList == ''">
-      <div style="font-size: 16px;color: #696969;text-align: center;background-color: #F3F3F3;line-height: 80px;">
-        暂无好友
-      </div>
     </div>
   </div>
 </template>
@@ -60,7 +62,10 @@
     background: #007EFF;
     width: 100%;
     height: 55px;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
   }
   .he span{
     color: white;
@@ -68,6 +73,9 @@
     position: relative;
     top: 15px;
     left: 16px;
+  }
+  .two{
+    margin-top: 56px;
   }
   .xh{
     width: 100vw;

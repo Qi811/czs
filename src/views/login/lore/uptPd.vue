@@ -3,26 +3,37 @@
     <tops :uptList="uptList" class="tops"></tops>
     <div class="ubo">
       <div class="umm">
-    <input class="ipt" @keydown="nowshow=true" maxlength="18" minlength="6" v-model="nowpassword" type="password" placeholder="请输入当前密码" />
-    <span @click="nowpassword = '',nowshow = false"
-      style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
-      :class="nowshow?'el-icon-circle-close':''">
-    </span>
-    <!-- <img src="../../../assets/close.png" /> -->
+        <input class="ipt" @keydown="nowshow=true" maxlength="18" minlength="6" v-model="nowpassword" :type="isnowshow ? password : text" placeholder="请输入当前密码" />
+        <!-- <span @click="nowpassword = '',nowshow = false"
+          style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
+          :class="nowshow?'el-icon-circle-close':''">
+        </span> -->
+        <div v-if="nowshow">
+          <img src="../../../assets/open.png" @click="isnowshow = false" v-if="isnowshow" style="float: right;margin-top: -37px;width: 25px;height: 30px;position: absolute;right: 62px;"/>
+          <img src="../../../assets/close.png" @click="isnowshow = true" v-if="!isnowshow" style="float: right;margin-top: -28px;width: 20px;height: 13px;margin-right: 2px;position: absolute;right: 62px;"/>
+        </div>
       </div>
       <div class="umm">
-    <input class="ipt" @keydown="newshow=true" maxlength="18" minlength="6" v-model="newpassword" type="password" placeholder="请输入新密码" />
-    <span @click="newpassword = '',newshow = false"
-      style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
-      :class="newshow?'el-icon-circle-close':''">
-    </span>
+        <input class="ipt" @keydown="newshow=true" maxlength="18" minlength="6" v-model="newpassword" :type="isnewshow ? password : text" type="password" placeholder="请输入新密码" />
+        <!-- <span @click="newpassword = '',newshow = false"
+          style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
+          :class="newshow?'el-icon-circle-close':''">
+        </span> -->
+        <div v-if="newshow">
+          <img src="../../../assets/open.png" @click="isnewshow = false" v-if="isnewshow" style="float: right;margin-top: -37px;width: 25px;height: 30px;position: absolute;right: 62px;"/>
+          <img src="../../../assets/close.png" @click="isnewshow = true" v-if="!isnewshow" style="float: right;margin-top: -28px;width: 20px;height: 13px;margin-right: 2px;position: absolute;right: 62px;"/>
+        </div>
       </div>
       <div class="umm">
-    <input class="ipt" @keydown="agashow=true" maxlength="18" minlength="6" v-model="againpassword" type="password" placeholder="请再次输入密码" />
-    <span @click="againpassword = '',agashow = false"
-      style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
-      :class="agashow?'el-icon-circle-close':''">
-    </span>
+    <input class="ipt" @keydown="agashow=true" maxlength="18" minlength="6" v-model="againpassword" :type="isagashow ? password : text" type="password" placeholder="请再次输入密码" />
+      <!-- <span @click="againpassword = '',agashow = false"
+        style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
+        :class="agashow?'el-icon-circle-close':''">
+      </span> -->
+        <div v-if="agashow">
+          <img src="../../../assets/open.png" @click="isagashow = false" v-if="isagashow" style="float: right;margin-top: -37px;width: 25px;height: 30px;position: absolute;right: 62px;"/>
+          <img src="../../../assets/close.png" @click="isagashow = true" v-if="!isagashow" style="float: right;margin-top: -28px;width: 20px;height: 13px;margin-right: 2px;position: absolute;right: 62px;"/>
+        </div>
       </div>
       <div>
         <button class="zc" @click="isOK()">确认修改</button>
@@ -48,7 +59,12 @@ export default{
       againpassword:"",
       nowshow:false,
       newshow:false,
-      agashow:false
+      agashow:false,
+      isnowshow:true,
+      isnewshow:true,
+      isagashow:true,
+      text:"text",
+      password:"password"
     }
   },
   methods:{

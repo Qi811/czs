@@ -51,7 +51,7 @@
     width: 100vw;
     height: 100vh;
     background-color: #F3F3F3;
-    margin-top: 0px;
+    margin-top: 110px;
     padding-top: 0px;
     font-family: "lucida console";
   }

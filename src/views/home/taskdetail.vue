@@ -156,11 +156,12 @@ export default {
         that.list = res.data.data;
         that.con = that.list.content;
         var stat = res.data.statusInfo;
-         if(stat == 1||stat==3||stat==4){ //已领取||审核失败||等待审核||已完成
+         if(stat == 1){ //已领取
           that.taskpull = false;
         }
-        else if(stat == 2||stat==5){//放弃
+        else if(stat == 2||stat==5||stat==3||stat==4){//放弃||审核失败||等待审核||已完成
           that.fucktask = false;
+          that.taskpull = true;
         }else if(stat == 0){//未领取
           that.taskpull = true;
         }
@@ -285,6 +286,7 @@ export default {
           // console.log(res);
           if (res.data.code == 0) {
               that.fucktask = false;
+              that.taskpull = true;
           } else {
            that.hin = true;
           }

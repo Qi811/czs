@@ -2,28 +2,30 @@
   <div class="one">
     <div class="bodymoney">
       <!-- 标题 -->
-      <div class="title">
-        <div class="fan" @click="back"></div>
-        <div class="tit">已接任务</div>
+      <div class="twbody">
+        <div class="title">
+          <div class="fan" @click="back"></div>
+          <div class="tit">已接任务</div>
+        </div>
+        <div class="wa">
+          <div class="inn">
+            <ul class='wz'>
+              <li @click="isActive=1" :class="{'active':isActive==1}" >
+                <router-link :to="{name:'daiwc'}">待完成</router-link>
+              </li>
+              <li @click="isActive=2" :class="{'active':isActive==2}">
+                <router-link :to="{name:'shz'}">审核中</router-link>
+              </li>
+              <li @click="isActive=3" :class="{'active':isActive==3}">
+                <router-link :to="{name:'ysh'}">已审核</router-link>
+              </li>
+              <li @click="isActive=4" :class="{'active':isActive==4}">
+                <router-link :to="{name:'shsb'}">审核失败</router-link>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    <div class="wa">
-      <div class="inn">
-        <ul class='wz'>
-          <li @click="isActive=1" :class="{'active':isActive==1}" >
-            <router-link :to="{name:'daiwc'}">待完成</router-link>
-          </li>
-          <li @click="isActive=2" :class="{'active':isActive==2}">
-            <router-link :to="{name:'shz'}">审核中</router-link>
-          </li>
-          <li @click="isActive=3" :class="{'active':isActive==3}">
-            <router-link :to="{name:'ysh'}">已审核</router-link>
-          </li>
-          <li @click="isActive=4" :class="{'active':isActive==4}">
-            <router-link :to="{name:'shsb'}">审核失败</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
     <div class="xs">
       <router-view></router-view>
     </div>
@@ -61,11 +63,16 @@
 <style scoped="scoped">
 
 .bodymoney {
-  background: url(../../assets/bj.png) no-repeat;
   background-size: 100%;
   background-color: #F3F3F3;
 }
   /* 标题样式 */
+  .twbody{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 
   .title {
     height: 60px;
@@ -74,6 +81,7 @@
     font-size: 16.2px;
     display: flex;
     line-height: 60px;
+    background: url(../../assets/bj.png) no-repeat;
   }
 
   .fan {

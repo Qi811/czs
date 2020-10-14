@@ -48,9 +48,9 @@
       </div>
     </div>
     <div class="choose">
-      <div>新手指南</div>
+      <div @click="beginner">新手指南</div>
       <div @click="uptdPaw">修改密码</div>
-      <div>商务合作</div>
+      <div @click="business">商务合作</div>
       <div @click="clearLogin">退出登录</div>
     </div>
     <div class="hiit" v-if="exit">
@@ -112,8 +112,14 @@ export default {
     received(){
       this.$router.push({ path: "/one/daiwc" });
     },
+    beginner(){
+      this.$router.push({ path: "/beginner" });
+    },
     uptdPaw(){
       this.$router.push({ path: "/uptpd" });
+    },
+    business(){
+      this.$router.push({ path: "/business" });
     },
     clearLogin(){
       this.exit = true;

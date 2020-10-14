@@ -9,10 +9,12 @@
       </div>
       <div class="kk">
         <div class="wz">
-          <span @click="isactive=1" :class="{'active':isactive==1}">
+           <!-- :class="{'active':isactive==1} -->
+          <span @click="setcolor=1" :class="setcolor == 1 ? 'active' : 'null'">
             <router-link :to="{name:'login'}">登录</router-link>
           </span>
-          <span @click="isactive=2" :class="{'active':isactive==2}">
+          <!-- :class="{'active':isactive==2}" -->
+          <span @click="setcolor=2"  :class="setcolor == 2 ? 'active' : 'null'">
             <router-link :to="{name:'register'}">注册</router-link>
           </span>
         </div>
@@ -30,11 +32,20 @@ export default{
   name:'setting',
   data(){
     return{
-      isactive:localStorage.getItem('isactive')?localStorage.getItem('isactive'):1
+      isactive:localStorage.getItem('isactive')?localStorage.getItem('isactive'):1,
+	  setcolor:1,
     }
+  },
+  created() {
+  	 
   },
   updated() {
     // localStorage.setItem('isactive',this.isactive)
+    if (this.$router.currentRoute.path == "/setting/login") {
+      this.setcolor = 1;
+    } else if (this.$router.currentRoute.path == "/setting/register"){
+      this.setcolor = 2;
+    }
   }
 }
 </script>

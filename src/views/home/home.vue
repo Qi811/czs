@@ -52,7 +52,7 @@ export default {
     }).then((res) => {
       that.hurl = res.data;
       // console.log(res);
-      // console.log(that.hurl);
+      console.log(that.hurl);
     });
   },
   methods: {
@@ -65,7 +65,7 @@ export default {
       this.$router.push("/home/news");
     },
     hintactive() {
-      this.hint = true;
+      this.$router.push("/game");
     },
     hintbtn() {
       this.hint = false;
@@ -77,7 +77,8 @@ export default {
       this.$router.push("/height");
     },
     usermoney() {
-      window.location.href = this.hurl;
+      // window.location.href = this.hurl;
+      this.$router.push("/enjoy");
     },
   },
 };

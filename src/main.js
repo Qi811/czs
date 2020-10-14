@@ -26,10 +26,19 @@ Vue.prototype.bus = new Vue;
 
 router.beforeEach((to,from,next) => {
   document.title = to.meta.title;
-  if(to.path == '/home/all'){
+  if(to.path == '/home/all' || to.path == '/home/news' || to.path == '/my'
+    || to.path == '/qrcode' || to.path == '/friend' || to.path == '/income'
+    || to.path == '/bottom' || to.path == '/height' || to.path == '/one'
+    || to.path == '/one/daiwc' || to.path == '/one/shsb' || to.path == '/one/shz'
+    || to.path == '/one/ysh' || to.path == '/uptpd' || to.path == '/cashList'
+    || to.path == '/cashInfo' || to.path == '/cash'){
     if(localStorage.getItem('id')){
       next()
     }else{
+      // this.bus.$emit('tips', {
+      //   show: true,
+      //   title: '你还未登录'
+      // })
       next('/setting/login')
     }
   }else{
@@ -42,6 +51,20 @@ router.beforeEach((to,from,next) => {
       next()
     }
   }
+  if(to.path == '/one/shsb'){
+    localStorage.setItem('isActive',4)
+    next()
+  }else if(to.path == '/one/shz'){
+    localStorage.setItem('isActive',2)
+    next()
+  }else if(to.path == '/one/ysh'){
+    localStorage.setItem('isActive',3)
+    next()
+  }else if(to.path == '/one/daiwc' || to.path == '/one'){
+    localStorage.setItem('isActive',1)
+    next()
+  }
+  next()
 });
 
 /* eslint-disable no-new */

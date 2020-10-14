@@ -40,6 +40,6 @@
     font-size: 23px;
     position: relative;
     top: 15px;
-    left: 16px;
+    left: 12px;
   }
 </style>

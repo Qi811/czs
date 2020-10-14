@@ -38,13 +38,12 @@ export default {
   },
   components: {},
   created() {
-    this.imgcolor = 1
     // console.log(this.$router.currentRoute.path);
     if (this.$router.currentRoute.path == "/my") {
       this.imgcolor = 3;
     } else if (this.$router.currentRoute.path == "/home/all") {
       this.imgcolor = 1;
-    } else {
+    } else if (this.$router.currentRoute.path == "/qrcode"){
       this.imgcolor = 2;
     }
   },
