@@ -1,4 +1,4 @@
-/* document.addEventListener('plusready',function(){
+document.addEventListener('plusready',function(){
    			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。")
    			//判断数组中是否包含某字符串
    			Array.prototype.contains = function(needle) {
@@ -56,16 +56,7 @@
 		   }
 		   aa();
 
-console.log(localStorage.getItem(aos))
-   		}, false ); */
-var model = "PCHM10";
-var os = "AndroidOS10";
-var ostype = os.slice(0, 9);
-var aos = os.slice(9) - 0;
-var osid =
-  '{"imei":"869698033120735,869698033120727","imsi":["460110751904817,460078672275663"],"uuid":"869698033120735,869698033120727"}';
-var aosid = "DE32B03CE6304C15877278B27F7A696Fbe533d5da61f4fa51f8c28478aea2259";
-
+// console.log(localStorage.getItem(aos);
 var ptype = 0;
 var sv = 0;
 
@@ -91,3 +82,14 @@ localStorage.setItem("aosid",aosid);
 localStorage.setItem("osid",osid);
 localStorage.setItem("sv",sv);
 localStorage.setItem("model",model);
+)
+   		}, false );
+/* var model = "PCHM10";
+var os = "AndroidOS10";
+var ostype = os.slice(0, 9);
+var aos = os.slice(9) - 0;
+var osid =
+  '{"imei":"869698033120735,869698033120727","imsi":["460110751904817,460078672275663"],"uuid":"869698033120735,869698033120727"}';
+var aosid = "DE32B03CE6304C15877278B27F7A696Fbe533d5da61f4fa51f8c28478aea2259"; */
+
+

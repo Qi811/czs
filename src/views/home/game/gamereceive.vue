@@ -9,10 +9,14 @@
         <div class="taskphoto" :style="'backgroundImage: url(' + item.imgurl + '); backgroundSize:100%;backgroundColor:none'"></div>
         <div class="tackmess">
           <div class="tackname">{{item.adname}}</div>
-          <div class="number" v-html="item.trialinfo">
+          <div class="number">
+            开始时间:{{item.starttime}}
+          </div>
+          <div class="number" style="margin-top: 4px;">
+            结束时间:{{item.stoptime}}
           </div>
         </div>
-        <div class="tackmoney" style="font-size: 13px;">{{item.showmoney}}</div>
+        <div class="tackmoney" style="font-size: 13px;">{{item.showmoney}}{{item.unit}}</div>
       </div>
         <!-- 暂无数据 -->
       <div
@@ -48,8 +52,10 @@
       }
     },
     created() {
+      var that = this;
       var page = 10;
-      var ptype = localStorage.getItem("ptype")
+      var ptype = localStorage.getItem("ptype");
+      var reslist = that.reslist;
       if(ptype == 2){
         this.$http.post('/XwPickTaskList',{
           userId:localStorage.getItem('id'),
@@ -58,7 +64,10 @@
           deviceid: localStorage.getItem("osid"),
           androidosv: localStorage.getItem("sv")
         }).then((res) =>{
-          this.list = res.data.list
+          console.log(res.data)
+          reslist = eval("(" +res.data + ")");
+          console.log(reslist.list)
+          this.list = reslist.list
           if(this.list.length == 0){
             this.nono = true
             this.gameitem = '暂无数据'
@@ -75,7 +84,7 @@
               page+=5;
             },1500);
             for(let i=0;i<page;i++){
-              if(this.list[i]=undefined){
+              if(reslist.list[i]=undefined){
                 this.nono = true;
                 this.gameitem = "暂无更多...";
               }
@@ -122,8 +131,5 @@
     font-size: 35px;
     padding-left: 20px;
     flex: 0.5;
-  }
-  .homeall{
-    margin-top: 55px;
   }
 </style>

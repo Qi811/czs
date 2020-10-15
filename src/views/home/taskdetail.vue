@@ -23,16 +23,6 @@
       <div class="statent" ref="state">加载中.......请稍后........</div>
     </div>
     <div :class="taskpull ? tanull : takpull">
-      <!-- <div class="state">步骤说明：</div>
-      <div class="step">
-        长沙南的星河中是无语的话的在暗示后盾吃好出事了敌法师的吃伤害啊
-      </div>
-      <div class="stepimg">
-        <img
-          src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=554697323,1329725419&fm=15&gp=0.jpg"
-          alt=""
-        />
-      </div> -->
       <div class="taskpullimg">
         <div class="state">任务提交：</div>
         <!-- :file-list="imagelist" -->
@@ -195,12 +185,12 @@ export default {
   },
   methods: {
     back() {
-      this.$router.push("/home");
+      this.$router.go(-1);
     },
     pull() {
       var that = this;
         this.$http
-          .get("/taskGain", {
+          .post("/taskGain", {
             params: { taskId: that.id, id: that.obj},
           })
           .then((res) => {
@@ -297,7 +287,6 @@ export default {
     },
     upchange(file) {
       var that = this;
-      // console.log(file);
       if (file.response != undefined) {
         that.fileList.push({
           name: file.name,
@@ -410,6 +399,9 @@ label {
   background-color: #fff;
   padding: 15px;
   border-radius: 5px;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-all;
 }
 .state {
   text-align: left;
@@ -424,6 +416,10 @@ label {
   line-height: 25px;
   text-align: left;
   font-size: 15px;
+}
+img{
+  width: 100%;
+  height: 100%;
 }
 
 /* 任务步骤 */

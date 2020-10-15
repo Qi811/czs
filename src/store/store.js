@@ -8,9 +8,12 @@ const store = new Vuex.Store({
 
 	},
 	state:{
+    url:''
 	},
 	mutations:{
-   
+    getUrl(state,url){
+      state.url = url
+    }
 	},
 	actions:{
 

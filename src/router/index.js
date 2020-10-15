@@ -109,7 +109,7 @@ export default new Router({
       {
         path: "/qrcode",
         name: "qrcode",
-        component: () => import ('@/views/team/qrcode.vue'),
+        component: () => import ('@/views/team/qrcode'),
         meta:{
           title:"我的二维码"
         }
@@ -118,7 +118,7 @@ export default new Router({
     {
       path: "/friend",
       name: "friend",
-      component: () => import ('@/views/team/friend.vue'),
+      component: () => import ('@/views/team/friend'),
       meta:{
         title:"下级人员"
       }
@@ -126,7 +126,7 @@ export default new Router({
     {
         path: "/income",
         name: "income",
-        component: () => import ('@/views/myPage/income.vue'),
+        component: () => import ('@/views/myPage/income'),
         meta:{
           title:"收支明细"
         }
@@ -134,7 +134,7 @@ export default new Router({
     {
         path: "/beginner",
         name: "beginner",
-        component: () => import ('@/views/myPage/beginner.vue'),
+        component: () => import ('@/views/myPage/beginner'),
         meta:{
           title:"新手指南"
         }
@@ -142,7 +142,7 @@ export default new Router({
     {
         path: "/business",
         name: "business",
-        component: () => import ('@/views/myPage/business.vue'),
+        component: () => import ('@/views/myPage/business'),
         meta:{
           title:"商务合作"
         }
@@ -177,17 +177,9 @@ export default new Router({
         component: () => import ('@/views/home/game/gamedemo'),
         meta:{
           title:"游戏试玩"
-        }
-    },
-    {
-        path: "/gameplay",
-        name: "gameplay",
-        component: () => import ('@/views/home/game/gameplay'),
-        meta:{
-          title:"游戏试玩"
-        }
-    },
-    {
+        },
+        redirect: "/gamereceive",
+        children:[{
         path: "/gamereceive",
         name: "gamereceive",
         component: () => import ('@/views/home/game/gamereceive'),
@@ -201,6 +193,29 @@ export default new Router({
         component: () => import ('@/views/home/game/gameover'),
         meta:{
           title:"完成列表"
+        }
+    },{
+        path: "/gametry",
+        name: "gametry",
+        component: () => import ('@/views/home/game/gametry'),
+        meta:{
+          title:"试玩列表"
+        },
+        }
+     ]
+    },
+    {
+        path: "/gamerquest",
+        name: "gamerquest",
+        component: () => import ('@/views/home/game/gamerquest'),
+
+    },
+    {
+        path: "/gamedetail/:id",
+        name: "gamedetail",
+        component: () => import ('@/views/home/game/gamedetail'),
+        meta:{
+          title:"游戏详情"
         }
     },
     {

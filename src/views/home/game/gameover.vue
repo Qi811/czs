@@ -5,14 +5,19 @@
     </div>
     <div class="homeall">
       <!-- 任务 -->
-      <div class="allson" @click="demodetail(item.adid)" v-for="(item, index) in list" :key="index">
+      <div class="allson" v-for="(item, index) in list" :key="index">
         <div class="taskphoto" :style="'backgroundImage: url(' + item.imgurl + '); backgroundSize:100%;backgroundColor:none'"></div>
         <div class="tackmess">
-          <div class="tackname">{{item.adname}}</div>
-          <div class="number" v-html="item.trialinfo">
+          <div class="tacknames">{{item.info2}}</div>
+          <div class="tacknames">{{item.info1}}</div>
+          <div class="tacknames">{{item.info3}}</div>
+          <div class="number">
+            开始时间:{{item.pay_time | formatDate}}
           </div>
         </div>
-        <div class="tackmoney" style="font-size: 13px;">{{item.showmoney}}</div>
+        <div>
+        </div>
+        <div class="tackmoney" style="font-size: 13px;">+{{item.price}}元</div>
       </div>
         <!-- 暂无数据 -->
       <div
@@ -47,18 +52,23 @@
         reslist:[],
       }
     },
+    filters: {
+      formatDate: function (value) {
+        return new Date(parseInt(value) * 1000).toLocaleString().replace(/:\d{1,2}$/,' ');
+      }
+    },
     created() {
-      var page = 10;
+      var page = 1;
+      var size = 5;
       var ptype = localStorage.getItem("ptype")
       if(ptype == 2){
-        this.$http.post('/XwPickTaskList',{
+        this.$http.post('/xwFinish',{
           userId:localStorage.getItem('id'),
-          ptype: ptype,
-          msaoaid: localStorage.getItem("aosid"),
-          deviceid: localStorage.getItem("osid"),
-          androidosv: localStorage.getItem("sv")
+          page: page,
+          size: size
         }).then((res) =>{
-          this.list = res.data.list
+          console.log(res)
+          this.list = res.data.data
           if(this.list.length == 0){
             this.nono = true
             this.gameitem = '暂无数据'
@@ -95,9 +105,6 @@
       black(){
         this.$router.go(-1);
       },
-      demodetail(id){
-        this.$router.push({path:'/gamedetail/'+id});
-      },
     }
   }
 </script>
@@ -113,6 +120,9 @@
     left: 0;
     right: 0;
   }
+  .allson{
+    height: 90px;
+  }
   .gametitle span{
     line-height: 55px;
     text-align: left;
@@ -123,7 +133,9 @@
     padding-left: 20px;
     flex: 0.5;
   }
-  .homeall{
-    margin-top: 55px;
+  .tacknames{
+    font-family: "Microsoft Yahei";
+    font-size: 13px;
+    margin-bottom: 10px;
   }
 </style>

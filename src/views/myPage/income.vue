@@ -67,12 +67,13 @@ export default {
     var id = localStorage.getItem('id')
     this.$http
       .post('/incomeInfo', {
-        id: 1,
+        id: localStorage.getItem('id'),
         page: 1,
         size: size,
         nullson: false,
       })
       .then((res) => {
+        console.log(res)
         this.list = res.data.data
         if (res.data.data.length == 0) {
           this.nullson = false;

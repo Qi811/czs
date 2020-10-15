@@ -102,6 +102,7 @@
     width: 100vw;
     height: 50px;
     background: #FE6E49;
+    margin-top: -1px
   }
   .inn{
     height: 20px;

@@ -66,6 +66,11 @@ export default{
       // ammshow:false
 		}
 	},
+  created() {
+    if( params.userId){
+    this.MemberId = params.userId;
+    }
+  },
   methods:{
     regi(){
       if (this.nickname == ""){
@@ -119,17 +124,18 @@ export default{
           username:this.tel,
           password:this.pass,
           twopassword:this.twopassword,
-          MemberId:this.memberId,
-          nickname:this.nickname
+          nickname:this.nickname,
+          MemberId:this.memberId
         }).then(res => {
 						if (res.data.code == 0) {
               localStorage.getItem("id",res.data.id)
 						    // this.$Raichu.reLaunch('/pages/index/index');
-              console.log('注册成功',res.data.message)
+                console.log('注册成功',res.data.message)
                 this.bus.$emit('tips', {
                   show: true,
                   title: '注册成功'
                 })
+                this.$router.replace({path:'/home/all'})
 						} else {
               this.bus.$emit('tips', {
                 show: true,
