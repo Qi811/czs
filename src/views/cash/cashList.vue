@@ -129,6 +129,7 @@ html,
 
 .fan {
   padding-top: 45px;
+  margin-left: -20px;
   width: 45px;
   height: 26px;
   transform: rotate(90deg) scale(0.6);

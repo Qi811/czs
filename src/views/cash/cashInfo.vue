@@ -7,7 +7,7 @@
     <div class="bo">
       <div class="zf">
         <div class="lx">支付类型</div>
-        <div class="xz">
+        <div class="xzo">
           <select class="se" v-model="isLx" @change="isSelect">
             <option value="0">支付宝</option>
             <option value="1">银行卡</option>
@@ -42,7 +42,7 @@
       </div>
       <div class="zfb" v-if="iszfb">
         <div class="zfblx">
-          <div class="lx">用户名</div>
+          <div class="lx" style="width: 80px;">用户名</div>
           <div class="xz">
             <input type="text" class="ipt" v-model="zfbUser" placeholder="请输入用户名"/>
           </div>
@@ -57,7 +57,7 @@
       <div class="bt">
         <button class="confirm-btn" @click="save">提 交</button>
       </div>
-      <div style="padding: 16px 32px;font-size: 12px;color: #999999;">
+      <div style="padding: 16px 32px;font-size: 12px;color: #999999;text-align: center;">
         提示：请正确填写收款人的卡号和真实的收款人姓名，否则将无法正常收款
       </div>
     </div>
@@ -122,7 +122,7 @@
     },
     methods:{
       back () {
-        this.$router.go(-1)
+        this.$router.push("/cash");
       },
       isSelect(){
         if(this.isLx == 0){
@@ -278,12 +278,34 @@
     display: flex;
   }
   .xz{
-    padding-left: 40px;
+      margin-left: 20px;
+      flex-shrink: 0;
+  }
+  .xzo{
+      margin-left: 16px;
+      flex-shrink: 0;
+  }
+  .lx{
+      flex-shrink: 0;
+      width: 80px;
   }
   .se,.ipt{
     outline: none;
     border: none;
     background-color: #F3F3F3;
     font-size: 14px;
+  }
+  @media screen and (max-width: 310px){
+    .lx{
+      font-size: 12px;
+      flex-shrink: 0;
+      width: 80px;
+    }
+    .xz{
+      flex-shrink: 0;
+    }
+    .confirm-btn{
+      width: 280px;
+    }
   }
 </style>

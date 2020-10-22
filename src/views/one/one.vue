@@ -34,6 +34,7 @@
 </template>
 
 <script>
+	
   export default{
     name:'one',
     data(){
@@ -50,7 +51,7 @@
     },
     methods: {
       back () {
-        this.$router.push('/my')
+        this.$router.push('/my');
       }
     },
     beforeRouteLeave(to,from,next) {
@@ -85,7 +86,8 @@
   }
 
   .fan {
-    padding-top: 45px;
+    margin-left: -20px;
+    padding-bottom: 80px;
     width: 45px;
     height: 26px;
     transform: rotate(90deg) scale(0.6);
@@ -95,8 +97,8 @@
   .tit {
     flex: 1;
     text-align: center;
-    padding-top: 8px;
-    padding-right: 35px;
+    padding-top: 25px;
+    padding-right: 25px;
   }
   .wa{
     width: 100vw;
@@ -127,7 +129,7 @@
     font-size: 15px;
     text-align: center;
   }
-  .wz li.active ::before{
+  /* .wz li.active ::before{
     content: '';
     width: 75px;
     height: 2px;
@@ -135,8 +137,8 @@
     position: absolute;
     top: 100px;
     margin-left: -15px;
-  }
-  .wz li:last-child.active ::before{
+  } */
+  /* .wz li:last-child.active ::before{
     background-color: #4169E1;
     content: '';
     width: 75px;
@@ -145,6 +147,6 @@
     position: absolute;
     top: 100px;
     margin-left: -7px;
-  }
+  } */
 
 </style>

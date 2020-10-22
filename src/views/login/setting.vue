@@ -33,7 +33,7 @@ export default{
   data(){
     return{
       isactive:localStorage.getItem('isactive')?localStorage.getItem('isactive'):1,
-	  setcolor:1,
+      setcolor:localStorage.getItem('isactive')?localStorage.getItem('isactive'):1,
     }
   },
   created() {

@@ -21,7 +21,9 @@
       <div :id="color ? yes : no" @click="all">全部任务</div>
       <div :id="color ? no : yes" @click="news">最新任务</div>
     </div>
-    <router-view></router-view>
+    <keep-alive>
+        <router-view></router-view>
+      </keep-alive>
     <div class="hiit" v-if="hint">
       <div class="hint">
         <div>该功能暂未开放，去看看其他任务吧~</div>
@@ -53,14 +55,20 @@ export default {
       that.hurl = res.data;
       // console.log(res);
     });
+
+    if (this.$router.currentRoute.path == "/home/all") {
+      this.color = true;
+    } else if (this.$router.currentRoute.path == "/home/news") {
+      this.color = false;
+    } 
   },
   methods: {
     all() {
-      this.color = !this.color;
+      this.color = true;
       this.$router.push("/home/all");
     },
     news() {
-      this.color = !this.color;
+      this.color = false;
       this.$router.push("/home/news");
     },
     hintactive() {
@@ -76,8 +84,10 @@ export default {
       this.$router.push("/height");
     },
     usermoney() {
-      // window.location.href = this.hurl;
-      this.$router.push("/enjoy");
+      //公众号版：
+      window.location.href = this.hurl;
+      //APP版：
+      // this.$router.push("/enjoy");
     },
   },
 };

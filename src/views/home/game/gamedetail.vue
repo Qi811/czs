@@ -4,7 +4,7 @@
       <span @click="black"><</span>
       <span>试玩步骤</span>
     </div>
-    <div style="padding-top: 50px;">
+    <div style="padding-top: 70px;">
       <div style="padding: 15px; background-color: #fff; display: flex;">
         <div class="gameimg" :style="'backgroundImage: url(' + toplist.imgUrl + '); backgroundSize:100%;backgroundColor:none'"></div>
         <div class="gamecontent">
@@ -125,9 +125,14 @@
            that.listtime =  datedifference(date1,date2);
          })
     },
+	/* beforeRouteLeave(to,from,next) {
+		this.$router.back(+1);
+		// console.log(this);
+		next();
+	}, */
     methods: {
       black() {
-        this.$router.go(-1);
+        this.$router.push('/gametry');
       },
       titleindex(index) {
         var that = this;
@@ -197,20 +202,22 @@
 
 <style>
   .divstyle{
-    background-color: #F3F3F3;    height: 100%;
+    background-color: #F3F3F3;    
+	height: 100%;
     width: 100%;
     min-height: 616px;
    padding-bottom: 50px;
   }
   .divslle{
-    background-color: #F3F3F3;    height: 100%;
+    background-color: #F3F3F3;    
+	height: 100%;
     width: 100%;
     min-height: 616px;
   }
   .gametitle {
     background: #00aaff;
     display: flex;
-    height: 50px;
+    height: 70px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -220,7 +227,8 @@
   }
 
   .gametitle span {
-    line-height: 50px;
+    line-height: 35px;
+	margin-top: 35px;
     text-align: left;
     color: #EEEEEE;
   }

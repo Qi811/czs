@@ -39,7 +39,6 @@
     color: white;
     font-size: 23px;
     position: relative;
-    top: 15px;
-    left: 12px;
+    top: 25px;
   }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div>
-    <div class="soltitle sontitle">
+    <div class="sontitle soltitle">
       <span style="float: left" @click="tui"></span><span>高价区</span>
     </div>
-    <div class="homeall">
+    <div class="homeall" style="padding-top:80px ;">
       <div class="allson" v-for="(item, index) in list" :key="index" @click="goDetail(item.id)">
         <div class="taskphoto"></div>
         <div class="tackmess">
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+	
 export default {
   data () {
     return {
@@ -65,7 +66,7 @@ export default {
   },
   methods: {
     tui () {
-      this.$router.push('/home')
+      this.$router.push('/home');
     },
     goDetail(id){
       this.$router.push({ path: "/taskdetail/" + id });
@@ -78,6 +79,9 @@ export default {
 .soltitle {
   width: 100%;
   height: 80px;
+	position: fixed;
+	left: 0;
+	top: 0;
   background: linear-gradient(
     rgba(205, 35, 150, 0.5),
     rgba(255, 255, 255, 0.5)

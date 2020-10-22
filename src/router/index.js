@@ -95,14 +95,16 @@ export default new Router({
             name: "all",
             component: () => import ('@/views/home/all'),
             meta:{
-              title:"全部任务"
+              title:"全部任务",
+              keepalive:true
             }
           },{
             path: "/home/news",
             name: "news",
             component: () => import ('@/views/home/news'),
             meta:{
-              title:"最新任务"
+              title:"最新任务",
+              keepalive:true
             }
           }]
       },
@@ -178,7 +180,7 @@ export default new Router({
         meta:{
           title:"游戏试玩"
         },
-        redirect: "/gamereceive",
+        redirect: "/gametry",
         children:[{
         path: "/gamereceive",
         name: "gamereceive",
@@ -201,14 +203,24 @@ export default new Router({
         meta:{
           title:"试玩列表"
         },
-        }
+      }
      ]
     },
     {
         path: "/gamerquest",
         name: "gamerquest",
         component: () => import ('@/views/home/game/gamerquest'),
-
+		meta:{
+			title:"下载"
+		}
+    },
+    {
+        path: "/download",
+        name: "download",
+        component: () => import ('@/views/login/download'),
+        meta:{
+          title:'下载'
+        }
     },
     {
         path: "/gamedetail/:id",
@@ -223,7 +235,8 @@ export default new Router({
         name: "taskdetail",
         component: () => import ('@/views/home/taskdetail'),
         meta:{
-          title:"任务详情"
+          title:"任务详情",
+          keepalive:true
         }
     },{
       path: '/one',
@@ -265,5 +278,8 @@ export default new Router({
         }
       ]
     }
-  ]
+  ],
+  scrollBehavior(to,from,savedPosition){
+    return{x:0,y:0}
+  }
 });

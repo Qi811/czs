@@ -56,7 +56,6 @@
       var page = 10;
       var ptype = localStorage.getItem("ptype");
       var reslist = that.reslist;
-      if(ptype == 2){
         this.$http.post('/XwPickTaskList',{
           userId:localStorage.getItem('id'),
           ptype: ptype,
@@ -64,9 +63,9 @@
           deviceid: localStorage.getItem("osid"),
           androidosv: localStorage.getItem("sv")
         }).then((res) =>{
-          console.log(res.data)
+          // console.log(res.data)
           reslist = eval("(" +res.data + ")");
-          console.log(reslist.list)
+          // console.log(reslist.list)
           this.list = reslist.list
           if(this.list.length == 0){
             this.nono = true
@@ -80,9 +79,7 @@
           var clientHeight = document.documentElement.clientHeight; // 屏幕高度也就是当前设备静态下你所看到的视觉高度
           var scrHeight = document.documentElement.scrollHeight || document.body.scrollHeight; // 整个网页的实际高度，兼容Pc端
           if (scrHeight - clientHeight - scr <= 0.4001) {
-            setTimeout(function(){
               page+=5;
-            },1500);
             for(let i=0;i<page;i++){
               if(reslist.list[i]=undefined){
                 this.nono = true;
@@ -92,9 +89,7 @@
           }
 
         })
-      }else{
-        this.hint = true;
-      }
+      
     },
     methods:{
       hintbtn() {
@@ -102,7 +97,7 @@
         this.$router.push("/home");
       },
       black(){
-        this.$router.go(-1);
+        this.$router.push('/home');
       },
       demodetail(id){
         this.$router.push({path:'/gamedetail/'+id});
@@ -115,7 +110,7 @@
   .gametitle{
     background-color: #1D77FF;
     display: flex;
-    height: 50px;
+    height: 70px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -123,7 +118,8 @@
     right: 0;
   }
   .gametitle span{
-    line-height: 55px;
+    line-height: 35px;
+	margin-top: 35px;
     text-align: left;
     color: #EEEEEE;
   }

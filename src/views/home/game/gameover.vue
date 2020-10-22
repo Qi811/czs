@@ -5,9 +5,9 @@
     </div>
     <div class="homeall">
       <!-- 任务 -->
-      <div class="allson" v-for="(item, index) in list" :key="index">
+      <div v-if="!nono" class="allson" v-for="(item, index) in list" :key="index">
         <div class="taskphoto" :style="'backgroundImage: url(' + item.imgurl + '); backgroundSize:100%;backgroundColor:none'"></div>
-        <div class="tackmess">
+        <div class="tackmesss">
           <div class="tacknames">{{item.info2}}</div>
           <div class="tacknames">{{item.info1}}</div>
           <div class="tacknames">{{item.info3}}</div>
@@ -15,9 +15,7 @@
             开始时间:{{item.pay_time | formatDate}}
           </div>
         </div>
-        <div>
-        </div>
-        <div class="tackmoney" style="font-size: 13px;">+{{item.price}}元</div>
+        <div class="tackmoneys" style="font-size: 13px;">+{{item.price}}元</div>
       </div>
         <!-- 暂无数据 -->
       <div
@@ -60,14 +58,12 @@
     created() {
       var page = 1;
       var size = 5;
-      var ptype = localStorage.getItem("ptype")
-      if(ptype == 2){
+      var ptype = localStorage.getItem("ptype");
         this.$http.post('/xwFinish',{
           userId:localStorage.getItem('id'),
           page: page,
           size: size
         }).then((res) =>{
-          console.log(res)
           this.list = res.data.data
           if(this.list.length == 0){
             this.nono = true
@@ -81,9 +77,7 @@
           var clientHeight = document.documentElement.clientHeight; // 屏幕高度也就是当前设备静态下你所看到的视觉高度
           var scrHeight = document.documentElement.scrollHeight || document.body.scrollHeight; // 整个网页的实际高度，兼容Pc端
           if (scrHeight - clientHeight - scr <= 0.4001) {
-            setTimeout(function(){
               page+=5;
-            },1500);
             for(let i=0;i<page;i++){
               if(this.list[i]=undefined){
                 this.nono = true;
@@ -93,9 +87,7 @@
           }
 
         })
-      }else{
-        this.hint = true;
-      }
+
     },
     methods:{
       hintbtn() {
@@ -103,8 +95,8 @@
         this.$router.push("/home");
       },
       black(){
-        this.$router.go(-1);
-      },
+        this.$router.push("/home");
+      }
     }
   }
 </script>
@@ -113,7 +105,7 @@
   .gametitle{
     background-color: #1D77FF;
     display: flex;
-    height: 50px;
+    height: 70px;
     width: 100%;
     position: fixed;
     top: 0;
@@ -121,10 +113,11 @@
     right: 0;
   }
   .allson{
-    height: 90px;
+    height: 100px;
   }
   .gametitle span{
-    line-height: 55px;
+    line-height: 35px;
+    margin-top: 35px;
     text-align: left;
     color: #EEEEEE;
   }
@@ -136,6 +129,21 @@
   .tacknames{
     font-family: "Microsoft Yahei";
     font-size: 13px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+  }
+  .tackmesss {
+    text-align: left;
+    margin-left: 10px;
+  }
+  .tackmoneys {
+    font-family: Verdana;
+    color: red;
+    font-size: 19px;
+    text-align: right;
+    margin-right: 10px;
+    word-wrap:break-word;
+    word-break:break-all;
+    overflow: hidden;
+    margin-left: 20px;
   }
 </style>

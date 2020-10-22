@@ -2,7 +2,10 @@
   <div class="body">
     <div class="top">
       <div class="user">
-        <div class="userimg"></div>
+        <div class="userimg">
+          <div class="userhead"></div>
+     <div class="userbody"></div>
+     </div>
         <div class="username">
           <span>{{ list.nickname }}</span>
           <span>ID:{{ list.id }}</span>
@@ -15,7 +18,7 @@
             class="nav"
             ref="nav"
             :style="'position: relative;margin-left: -20px;top: -18px;left: ' + navleft + 'px;'"
-            >93%</span
+            >{{du}}%</span
           >
           <div class="plan">
             <span ref="planspan" :style="' width:' + spanwidth + 'px'"></span>
@@ -52,6 +55,7 @@
       <div @click="uptdPaw">修改密码</div>
       <div @click="business">商务合作</div>
       <div @click="clearLogin">退出登录</div>
+      <div @click="download">下载链接</div>
     </div>
     <div class="hiit" v-if="exit">
       <div class="hint">
@@ -96,33 +100,40 @@ export default {
       // console.log(that.list);
       this.spanwidth = 220 * (that.du * 0.01);
       this.navleft = 220 * (that.du * 0.01);
-      this.$refs.nav.innerHTML = this.du + "%";
+      // this.$refs.nav.innerHTML = this.du + "%";
     });
   },
   mounted() {
     var that = this;
     this.spanwidth = 220 * (that.du * 0.01);
     this.navleft = 220 * (that.du * 0.01);
-    this.$refs.nav.innerHTML = this.du + "%";
+    // this.$refs.nav.innerHTML = this.du + "%";
+  },
+  beforeRouteEnter(to,from,next) {
+    // console.log(to,from)
+    next()
   },
   methods: {
     sonmoney() {
-      this.$router.push({ path: "/income" });
+      this.$router.push("/income");
     },
     received(){
-      this.$router.push({ path: "/one/daiwc" });
+      this.$router.push("/one/daiwc");
     },
     beginner(){
-      this.$router.push({ path: "/beginner" });
+      this.$router.push("/beginner");
     },
     uptdPaw(){
-      this.$router.push({ path: "/uptpd" });
+      this.$router.push("/uptpd");
     },
     business(){
-      this.$router.push({ path: "/business" });
+      this.$router.push("/business");
     },
     clearLogin(){
       this.exit = true;
+    },
+    download(){
+      this.$router.push("/download");
     },
     cancelbtn(){
       this.exit = false;
@@ -132,13 +143,13 @@ export default {
       this.$router.push('/setting/login')
     },
     balance(){
-      this.$router.push({ path: "/cash" });
+      this.$router.push("/cash");
     }
   }
 };
 </script>
 
-<style>
+<style scoped="scoped">
 .body {
   background-color: #f3f3f3;
 }
@@ -158,10 +169,29 @@ export default {
 }
 .userimg {
   width: 60px;
-  height: 60px;
+  height: 50px;
+  background: #00AAFF;
   border-radius: 50%;
-  background-color: #fff;
-}
+  padding-top: 8px;
+  overflow: hidden;
+ }
+
+ .userhead {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-bottom: 5px;
+  margin-left: 18px;
+  background-color: blue;
+ }
+
+ .userbody {
+  width: 50px;
+  height: 30px;
+  margin-left: 6px;
+  border-radius: 38%;
+  background-color: blue;
+ }
 .username span {
   display: block;
   text-align: left;
@@ -303,7 +333,8 @@ export default {
   border: 1px rgb(69, 69, 69, 0.2) solid;
 }
 .choose div:first-child,
-.choose div:nth-child(2) {
+.choose div:nth-child(2),
+.choose div:nth-child(3) {
   border-bottom: none;
 }
 .choose div:last-child {

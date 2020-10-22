@@ -27,7 +27,7 @@
         <div class="state">任务提交：</div>
         <!-- :file-list="imagelist" -->
         <el-upload
-          action="http://192.168.0.15:8080/externalApi/upload"
+          action="http://47.99.210.93:8080/externalApi/upload"
           list-type="picture-card"
           :auto-upload="true"
           :on-change="upchange"
@@ -74,7 +74,7 @@
       </div>
       <div class="taskpulltxt">
         <div>备注：</div>
-        <input type="text" v-model="textva" />
+        <textarea type="text" v-model="textva" placeholder="您可以输入手机号码(13xxxxxxxxx),及想对发单者说的内容!(非必填)"></textarea>
       </div>
     </div>
     <div class="btom" v-if="fucktask">
@@ -87,7 +87,7 @@
     <div class="hiit" v-if="hint">
       <div class="hint">
         <div>记得上传验证图片哦~</div>
-        <button @click="hintbtn">确认</button>
+        <button @click="hintbtn" style="margin-left: -10px;">确认</button>
       </div>
     </div>
     <div class="hiit" v-if="exit">
@@ -185,36 +185,40 @@ export default {
   },
   methods: {
     back() {
-      this.$router.go(-1);
+      this.$router.push('/home');
     },
     pull() {
-      var that = this;
-        this.$http
-          .post("/taskGain", {
-            params: { taskId: that.id, id: that.obj},
-          })
-          .then((res) => {
-            console.log(res);
 
-           if( res.data.code==0){
-             that.hin = true;
-             that.tishi="领取成功！快去完成任务吧";
-             setTimeout(function(){
-               that.hin = false;
-             },1500);
-             that.iftask = 1;
-             this.taskpull = false;
+		var that = this;
+		  this.$http
+			.post("/taskGain", {
 
-           }else{
-             that.hin = true;
-             that.tishi=res.data.message;
-             setTimeout(function(){
-               that.hin = false;
-             },1500);
-             that.iftask = 1;
-             this.taskpull = true;
-           }
-          })
+				taskId: that.id,
+				id: that.obj,
+
+			})
+			.then((res) => {
+			  // console.log(res);
+
+			 if( res.data.code==0){
+			   that.hin = true;
+			   that.tishi="领取成功！快去完成任务吧";
+			   setTimeout(function(){
+				 that.hin = false;
+			   },1500);
+			   that.iftask = 1;
+			   this.taskpull = false;
+
+			 }else{
+			   that.hin = true;
+			   that.tishi=res.data.message;
+			   setTimeout(function(){
+				 that.hin = false;
+			   },1500);
+			   that.iftask = 1;
+			   this.taskpull = true;
+			 }
+		})
     },
     taskup() {
       this.exit = true;
@@ -229,7 +233,7 @@ export default {
       // console.log(that.upimage);
       if (that.upimage == "") {
         this.hint = true;
-      } else {
+      }else {
         var id = this.$route.params.id - 0;
         var obj = this.obj;
         var userin = that.textva;
@@ -248,7 +252,7 @@ export default {
                 that.hin = false;
                 that.fileList = [];
                 that.taskpull = false;
-                that.$router.push("/home");
+                that.$router.go(-1);
               }, 2000);
             } else {
               that.tishi = "提交失败，请重新提交";
@@ -258,7 +262,7 @@ export default {
               }, 2000);
             }
           });
-      }
+	  }
     },
     hintbtn() {
       this.hint = false;
@@ -328,7 +332,8 @@ label {
 .title {
   width: 100%;
   height: 20px;
-  padding: 20px 0px;
+  padding-top: 35px;
+	padding-bottom: 5px;
   font-size: 18px;
   color: #fff;
   letter-spacing: 4px;
@@ -337,6 +342,7 @@ label {
   left: 0;
   right: 0;
   background: #0079FE;
+  z-index: 999;
 }
 .title img {
   width: 20px;
@@ -490,12 +496,14 @@ img{
   margin-top: 10px;
   text-align: left;
 }
-.taskpulltxt input {
+.taskpulltxt textarea {
   border: none;
   outline: none;
   font-size: 15px;
   margin-top: 15px;
   color: gray;
+  width: 100%;
+  height: 80px;
 }
 /* 备注 */
 

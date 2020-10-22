@@ -9,7 +9,7 @@
       <span>可提现总额</span>
     </div>
     <div class="lookMoney">
-      <span>¥ 0</span>
+      <span>¥ {{tixianPrice}}</span>
     </div>
     <div class="hz">
       <div class="inn">
@@ -19,7 +19,7 @@
         </div>
         <div class="two">
           <span>¥</span>
-          <input type="text" v-model="money" placeholder="请输入金额" />
+          <input type="number" v-model="money" placeholder="请输入金额" />
         </div>
       </div>
     </div>
@@ -30,15 +30,13 @@
           <textarea v-model="content" @keydown="contentshow=true" placeholder="请输入内容">
           </textarea>
           <span @click="content = '',contentshow = false"
-            style="float: right;margin-top: 18px;width: 5px;height: 5px;margin-right: 15px;"
+            style="float: right;width: 5px;height: 5px;margin-right: 15px;"
             :class="contentshow?'el-icon-circle-close':''">
           </span>
         </div>
       </div>
     </div>
-    <div class="tx">
-      <button @click="getCash">提现</button>
-    </div>
+    <button class="txbtn" @click="getCash">提现</button>
     <div class="txSetting">
       <button @click="getcashInfo">提现账号设置</button>
     </div>
@@ -53,6 +51,7 @@
           content: '',
           user: '',
           bankNumber:'',
+          tixianPrice:'',
           contentshow:false
         }
       },
@@ -61,6 +60,7 @@
           id: localStorage.getItem('id'),
         }).then(res => {
           this.user = res.data;
+          this.tixianPrice = res.data.price
           this.bankNumber=res.data.bank_number;
         });
       },
@@ -72,7 +72,22 @@
           this.$router.push('/cashList')
         },
         getCash() {
-          if (!this.bankNumber) {
+		if(this.money == ''){
+			this.bus.$emit('tips', {
+				show: true,
+				title: '请输入要提现的金额'
+			})
+		}else if(Number(this.money) < 10){
+            this.bus.$emit('tips', {
+              show: true,
+              title: '提现金额最低额度10元'
+            })
+          }else if(Number(this.money) > Number(this.tixianPrice)){
+            this.bus.$emit('tips', {
+              show: true,
+              title: '余额不足'
+            })
+          }else if (!this.bankNumber) {
             this.bus.$emit('tips', {
               show: true,
               title: '请先设置提现账号'
@@ -122,7 +137,8 @@
   line-height: 60px;
 }
 .fan {
-  padding-top: 45px;
+  padding-top: 60px;
+  margin-left: -20px;
   width: 45px;
   height: 26px;
   transform: rotate(90deg) scale(0.6);
@@ -131,11 +147,11 @@
 .tit {
   flex: 1;
   text-align: center;
-  padding-top: 8px;
-  padding-right: 25px;
+  padding-top: 15px;
+  padding-right: 15px;
 }
 .jr{
-  padding-top: 8px;
+  padding-top: 15px;
   padding-right: 5px;
 }
 .canMoney{
@@ -163,7 +179,7 @@
 .inn{
   width: 90%;
   height: max-content;
-  margin-left: 20px;
+  margin: 20px;
   background-color: rgb(255, 255, 255);
   box-shadow: lightslategray 0px 1px 10px;
   margin-top: 15px;
@@ -187,6 +203,7 @@
 .two :nth-child(1){
   font-size: 14px;
   color: rgb(51, 51, 51);
+  margin-top: 1px;
 }
 .two :nth-child(2){
   outline: none;
@@ -200,25 +217,27 @@
   text-align: center;
 }
 .inner{
+  width: 90%;
   height: max-content;
   margin: 20px;
   background-color: rgb(255, 255, 255);
   box-shadow: lightslategray 0px 1px 10px;
   margin-top: 25px;
   border-radius: 10px;
-  padding: 10px;
-}
+ }
 .wz{
   font-size: 16px;
   color: rgb(51, 51, 51);
   display: flex;
   flex-direction: row;
+  padding: 10px;
 }
 .bzin {
   display: flex;
   flex-direction: row;
   color: rgb(192, 196, 204);
   padding-top: 20px;
+  padding: 10px;
 }
 .bzin textarea{
   width: 90%;
@@ -229,13 +248,9 @@
   margin: 0;
   font-family: '正体';
 }
-.tx{
-  width: 100%;
-  text-align: center;
-}
-.tx button{
-  width: 343px;
-  margin: 16px;
+.txbtn{
+  width: 90%;
+  margin: 20px;
   font-size: 18px;
   background: rgb(230, 67, 64);
   color: white;
@@ -244,9 +259,8 @@
   line-height: 40px;
 }
 .txSetting{
-  display: flex;
   width: 100%;
-  justify-content: center;
+  text-align: center;
 }
 .txSetting button{
   color: grey;
@@ -254,4 +268,9 @@
   padding-top: 10px;
   background: #ececec;
 }
+  @media screen and (max-width: 310px){
+    .tx button{
+      width: 280px;
+    }
+  }
  </style>

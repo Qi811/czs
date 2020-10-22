@@ -106,7 +106,8 @@ button:active {
 
 .sontitle span {
     font-size: 15px;
-    line-height: 80px;
+    margin-left: 20px;
+    margin-top: 20px;
     display: inline-block;
 }
 
@@ -114,12 +115,13 @@ button:active {
     width: 45px;
     height: 26px;
     padding-top: 45px;
+    margin-left: -20px;
     transform: rotate(90deg) scale(0.6);
     background: url(..\assets\down.png) no-repeat;
 }
 .sontitle span:nth-child(2) {
     line-height: 70px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 
@@ -164,8 +166,10 @@ button:active {
     border: 1.8px rgb(0, 123, 219, 0.5) solid;
     background: none;
     margin-right: 20px;
+    margin-left: -20px;
 }
 
 #sure {
+    margin-left: 20px;
     background: rgb(0, 123, 219, 0.5);
 }

@@ -53,25 +53,31 @@ export default{
 	name:'register',
 	data(){
 		return{
-      nickname:"",
-      tel:"",
-      // code:"",
-      pass:"",
-      twopassword:"",
-      memberId:"",
-			cs : /^1[3-9]{1}[0123456789]{9}$/,
-      nicknameshow:false,
-      telshow:false,
-      // mmshow:false,
-      // ammshow:false
+		  nickname:"",
+		  tel:"",
+		  // code:"",
+		  pass:"",
+		  twopassword:"",
+		  memberId:"",
+		  cs : /^1[3-9]{1}[0123456789]{9}$/,
+		  nicknameshow:false,
+		  telshow:false,
+      zfc:''
+		  // mmshow:false,
+		  // ammshow:false
 		}
 	},
   created() {
-    if( params.userId){
-    this.MemberId = params.userId;
-    }
+    this.zfc = window.location.href
+    this.czfc()
   },
   methods:{
+   czfc(){
+      this.memberId = this.zfc.substring(this.zfc.lastIndexOf("=")+1, this.zfc.length);
+      if(this.memberId.length > 9){
+        this.memberId = ''
+      }
+    },
     regi(){
       if (this.nickname == ""){
         this.bus.$emit('tips', {
@@ -91,6 +97,12 @@ export default{
           title: '请输入正确的手机号'
         })
       }
+	  else if (!this.cs.test(this.tel)){
+		this.bus.$emit('tips', {
+			show: true,
+			title: '手机号输入格式不正确'
+		})
+	  }
       // else if(this.code == ""){
       //   console.log("验证码不能为空")
       // }
@@ -135,7 +147,7 @@ export default{
                   show: true,
                   title: '注册成功'
                 })
-                this.$router.replace({path:'/home/all'})
+                this.$router.replace({ path: "/setting/login" })
 						} else {
               this.bus.$emit('tips', {
                 show: true,

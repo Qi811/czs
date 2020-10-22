@@ -64,6 +64,13 @@ router.beforeEach((to,from,next) => {
     localStorage.setItem('isActive',1)
     next()
   }
+  if(to.path == '/setting/register'){
+    localStorage.setItem('isactive',2)
+    next()
+  }else if(to.path == '/setting/login'){
+    localStorage.setItem('isactive',1)
+    next()
+  }
   next()
 });
 

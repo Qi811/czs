@@ -1,29 +1,23 @@
-<template>
+  <template>
   <div class="hello">
     <router-view></router-view>
     <div class="end">
-      <span @click="home">
-        <img
+        <img @click="home"
           :id="imgcolor == 1 ? 'color' : 'null'"
           src="..\assets\home.png"
           alt="主页"
         />
-      </span>
-      <span @click="friend">
-        <img
+        <img @click="friend"
           :id="imgcolor == 2 ? 'color' : 'null'"
           src="..\assets\friend.png"
           alt="好友"
         />
-      </span>
-      <span @click="my">
-        <img
+        <img @click="my"
           :id="imgcolor == 3 ? 'color' : 'null'"
           src="..\assets\my.png"
           alt="我的"
           style="transform: scale(0.18)"
         />
-      </span>
     </div>
   </div>
 </template>
@@ -87,12 +81,12 @@ export default {
   width: 100%;
   height: 57px;
 }
-.end span {
+.end {
   flex: 1;
 }
-.end span img {
+.end img {
   width: 100%;
-  height: 100%;
+  height: 200%;
   transform: scale(0.4);
   filter: grayscale(100%);
 }

@@ -128,45 +128,45 @@ export default{
 </script>
 
 <style>
-  .tops{
-    padding: 10px 0px 0px 10px;
-  }
-  .el-input__inner{
-    color: black;
-    font-size: 12px;
-    letter-spacing: 2px;
-    background: #F3F3F3;
-  }
-  .umm{
-    width: 90%;
-    height: 45px;
-    font-size: 16px;
-    line-height: 3;
-    font-family: '黑体';
-    margin-left: 2%;
-    margin-top: 15px;
-    border-bottom: 1px solid gainsboro;
-  }
-  .ipt{
-    outline: none;
-    border: none;
-    background: #F3F3F3;
-    height: 40px;
-    width: 90%;
-    font-size: 17px;
-  }
-  .zc{
-    width: 90%;
-    margin-left: 5%;
-    margin-top: 40px;
-    height: 40px;
-    border: none;
-    outline: none;
-    border-radius: 20px;
-    background: #007EFF;
-    color: white;
-    font-size: 18px;
-    letter-spacing: 1px;
-    text-align: center;
-  }
+    .tops{
+      padding: 10px 0px 0px 10px;
+    }
+    .el-input__inner{
+      color: black;
+      font-size: 12px;
+      letter-spacing: 2px;
+      background: #F3F3F3;
+    }
+    .umm{
+      width: 90%;
+      height: 45px;
+      font-size: 16px;
+      line-height: 3;
+      font-family: '黑体';
+      margin-left: 2%;
+      margin-top: 15px;
+      border-bottom: 1px solid gainsboro;
+    }
+    .ipt{
+      outline: none;
+      border: none;
+      background: #F3F3F3;
+      height: 40px;
+      width: 90%;
+      font-size: 15px;
+    }
+    .zc{
+      width: 90%;
+      margin-left: 5%;
+      margin-top: 40px;
+      height: 40px;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      background: #007EFF;
+      color: white;
+      font-size: 18px;
+      letter-spacing: 1px;
+      text-align: center;
+    }
 </style>

@@ -28,12 +28,13 @@
     },
 
     created() {
+		var that = this;
 	  if (this.$router.currentRoute.path == "/gameover") {
-	        this.buttonact = 3;
+	        that.buttonact = 3;
 	      } else if (this.$router.currentRoute.path == "/gamereceive") {
-	        this.buttonact = 2;
+	        that.buttonact = 2;
 	      } else if (this.$router.currentRoute.path == "/gametry"){
-	        this.buttonact = 1;
+	        that.buttonact = 1;
 	      }
     },
     methods: {
@@ -46,6 +47,7 @@
       },
       gameregame(e){
         this.buttonact=e;
+		var that = this;
         if(e==1){
           this.$router.push("/gametry");
         }else if(e==2){
@@ -62,15 +64,17 @@
   .gametitle{
     background-color: #1D77FF;
     display: flex;
-    height: 50px;
+    height: 70px;
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+	z-index: 55;
   }
   .gametitle span{
-    line-height: 55px;
+    line-height: 35px;
+		margin-top: 35px;
     text-align: left;
     color: #EEEEEE;
   }
@@ -85,7 +89,7 @@
   .btnPlay{
     display: flex;
     background: #FFFFFF;
-    margin: 60px 10px 10px 10px;
+    margin: 75px 10px 5px 10px;
   }
   .recelivePlay{
     flex: 1;

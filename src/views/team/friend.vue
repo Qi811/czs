@@ -39,7 +39,7 @@
     },
     methods:{
       goback(){
-        this.$router.go(-1)
+       this.$router.push('/qrcode');
       }
     },
     filters: {
@@ -59,61 +59,61 @@
 
 <style scoped="scoped">
   .he{
-    background: #007EFF;
-    width: 100%;
-    height: 55px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-  .he span{
-    color: white;
-    font-size: 23px;
-    position: relative;
-    top: 15px;
-    left: 16px;
-  }
-  .two{
-    margin-top: 56px;
-  }
-  .xh{
-    width: 100vw;
-    height: 80px;
-    display: flex;
-    background-color: white;
-    margin-bottom: 2px;
-  }
-  .tp{
-    width: 80px;
-    height: 120px;
-  }
-  .tpn{
-    width: 60px;
-    height: 60px;
-    background-color: #FFFF00;
-    border-radius: 10px;
-    margin: 10px 5px 20px 10px;
-  }
-  .rg{
-    flex: 1;
-    margin-left: 5px;
-  }
-  .bt{
-    font-size: 15px;
-    font-weight: bolder;
-    padding-top: 25px;
-  }
-  .ywc{
-    margin-top: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #6B7D93;
-  }
-  .sj{
-    font-size: 12px;
-    line-height: 1.2;
-    color: gray;
-    padding-top: 5px;
-  }
+      background: #007EFF;
+      width: 100%;
+      height: 60px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
+    .he span{
+      color: white;
+      font-size: 23px;
+      position: relative;
+      top: 30px;
+      left: 8px;
+    }
+    .two{
+      margin-top: 56px;
+    }
+    .xh{
+      width: 100vw;
+      height: 80px;
+      display: flex;
+      background-color: white;
+      margin-bottom: 2px;
+    }
+    .tp{
+      width: 80px;
+      height: 120px;
+    }
+    .tpn{
+      width: 60px;
+      height: 60px;
+      background-color: #FFFF00;
+      border-radius: 10px;
+      margin: 10px 5px 20px 10px;
+    }
+    .rg{
+      flex: 1;
+      margin-left: 5px;
+    }
+    .bt{
+      font-size: 15px;
+      font-weight: bolder;
+      padding-top: 25px;
+    }
+    .ywc{
+      margin-top: 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #6B7D93;
+    }
+    .sj{
+      font-size: 12px;
+      line-height: 1.2;
+      color: gray;
+      padding-top: 5px;
+    }
 </style>

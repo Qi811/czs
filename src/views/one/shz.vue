@@ -56,9 +56,7 @@
                 }
                 // console.log( _this.dataList);
 
-               setTimeout(function () {
                   numpage++;
-                }, 1000);
               }
               /* else {   显示暂无更多
                 that.nono = true;
